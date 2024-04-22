@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atendimento on-line</title>
+  <link rel="stylesheet" href="chat.css" />
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat-screen">
+      <header>
+        <div id='titulo'>
+          <h2>Atendimento on-line</h2>
+        </div>
+      </header>
+      <div class="linha"></div>
+      <div class="messages-list" id="messages-list">
+        <div class="message-item">
+          <div class="msg-user-at"><strong>Atendente diz:</strong></div>
+          <div id='chatat'>
+            <div class="msg-chat-at">Olá Sr. Blabla</div>
+          </div>
+        </div>
+        <div class="message-item">
+          <div class="msg-user-at"><strong>Atendente diz:</strong></div>
+          <div id='chatat'>
+            <div class="msg-chat-at">Tudo certo?</div>
+          </div>
+        </div>
+      </div>
+      <div class="linha"></div>
+      <form id="form-chat-send" action="index.html" method="post">
+        <input type="text" id="message" name="message" placeholder="Digite sua mensagem...">
+        <button type="submit">ENVIAR</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('form-chat-send').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+      
+      var messageInput = document.getElementById('message');
+      var messageText = messageInput.value;
+
+      if (messageText.trim() !== '') {
+        var messageList = document.getElementById('messages-list');
+
+        var messageItem = document.createElement('div');
+        messageItem.classList.add('msg-lista');
+
+        var userMsgDiv = document.createElement('div');
+        userMsgDiv.classList.add('msg-user-e');
+        userMsgDiv.innerHTML = '<strong>Você diz:</strong>';
+
+        var chatVcDiv = document.createElement('div');
+        chatVcDiv.classList.add('msg-chat-e');
+        chatVcDiv.textContent = messageText;
+
+        messageItem.appendChild(userMsgDiv);
+        messageItem.appendChild(chatVcDiv);
+
+        messageList.appendChild(messageItem);
+
+        messageInput.value = '';
+
+        messageList.scrollTop = messageList.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>
